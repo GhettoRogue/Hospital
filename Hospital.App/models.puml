@@ -1,0 +1,47 @@
+﻿@startuml
+'https://plantuml.com/class-diagram
+
+enum Sex {
+    Male
+    Female
+}
+
+Sex <--* Person
+abstract class Person {
+    + Id : Guid
+    + FirstName : string
+    + LastName : string
+    + Patronymic : string
+    + DateOfBirth : DateTime
+    + Sex : Sex
+    
+    + GetAge() : int
+    + GetFullName() : string
+}
+
+Person <|-- Doctor
+class Doctor {
+    + Specialization : string
+}
+
+Doctor <--* Examenation
+class Examenation {
+    + Date : DateTime
+    + Doctor : Doctor
+    + Commentary : string
+}
+
+Examenation <--o MedicalCard
+class MedicalCard {
+    + Id : string
+    + Examenations : Examenation[]
+}
+
+Person <|-- Patient
+MedicalCard <--* Patient
+class Patient {
+    + MedicalPolicyNumber : string
+    + MedicalCard : MedicalCard
+}
+
+@enduml
