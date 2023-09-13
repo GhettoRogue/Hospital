@@ -16,6 +16,11 @@ public class MedicalCard
         _examinations = new List<Examination>();
     }
 
+    public void AddExamination(DateTime date, Doctor doctor, string commentary)
+    {
+        _examinations.Add(new Examination(date, doctor, commentary));
+    }
+
     public static string CreateId(string firstName, string lastName, string patronymic, DateTime dateOfBirth)
     {
         var idBuilder = new StringBuilder();
