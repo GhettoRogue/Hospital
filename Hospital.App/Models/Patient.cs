@@ -1,4 +1,6 @@
-﻿namespace Hospital.App.Models;
+﻿using System.Text.Json.Serialization;
+
+namespace Hospital.App.Models;
 
 public class Patient : Person
 {
@@ -14,6 +16,7 @@ public class Patient : Person
             dateOfBirth: DateOfBirth));
     }
 
+    [JsonConstructor]
     public Patient(Guid id, string firstName, string lastName, string? patronymic, DateTime dateOfBirth, Sex sex, string medicalPolicyNumber, MedicalCard medicalCard) : base(id, firstName, lastName, patronymic, dateOfBirth, sex)
     {
         MedicalPolicyNumber = medicalPolicyNumber;

@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Hospital.App.Models;
 
@@ -14,6 +15,13 @@ public class MedicalCard
     {
         _id = id;
         _examinations = new List<Examination>();
+    }
+
+    [JsonConstructor]
+    public MedicalCard(string id, List<Examination> examinations)
+    {
+        _id = id;
+        _examinations = examinations;
     }
 
     public void AddExamination(DateTime date, Doctor doctor, string commentary)

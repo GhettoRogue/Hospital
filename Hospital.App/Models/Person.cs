@@ -1,4 +1,6 @@
-﻿namespace Hospital.App.Models;
+﻿using System.Text.Json.Serialization;
+
+namespace Hospital.App.Models;
 
 public abstract class Person
 {
@@ -7,9 +9,13 @@ public abstract class Person
     public string FirstName { get; init; }
     public string LastName { get; init; }
     public string? Patronymic { get; init; }
+    
+    [JsonIgnore]
     public string FullName => $"{LastName} {FirstName} {Patronymic}";
     
     public DateTime DateOfBirth { get; init; }
+    
+    [JsonIgnore]
     public int Age
     {
         get
