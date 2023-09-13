@@ -5,8 +5,9 @@ public class Patient : Person
     public string MedicalPolicyNumber { get; init; }
     public MedicalCard MedicalCard { get; init; }
 
-    public Patient(string firstName, string lastName, string? patronymic, DateTime dateOfBirth, Sex sex) : base(Guid.NewGuid(), firstName, lastName, patronymic, dateOfBirth, sex)
+    public Patient(string firstName, string lastName, string? patronymic, DateTime dateOfBirth, Sex sex, string medicalPolicyNumber) : base(Guid.NewGuid(), firstName, lastName, patronymic, dateOfBirth, sex)
     {
+        MedicalPolicyNumber = medicalPolicyNumber;
         MedicalCard = new MedicalCard(Models.MedicalCard.CreateId(firstName: FirstName,
             lastName: LastName,
             patronymic: Patronymic ?? "0",
