@@ -3,41 +3,35 @@ using Hospital.App.Models;
 
 namespace Hospital.App.DAL;
 
-public class JsonContext : IContext
+public class JsonContext : FileContext, IContext
 {
-    private readonly string _pathToDoctors;
-    private readonly string _pathToPatients;
-    
     public List<Doctor> Doctors { get; set; }
     public List<Patient> Patients { get; set; }
 
-    public JsonContext(string pathToDoctors, string pathToPatients)
-    {
-        _pathToDoctors = pathToDoctors;
-        _pathToPatients = pathToPatients;
-    }
+    public JsonContext(string pathToDoctors, string pathToPatients) : base(pathToDoctors, pathToPatients)
+    { }
 
     public void ImportDoctors()
     {
-        var doctorsJson = File.ReadAllText(_pathToDoctors);
+        var doctorsJson = File.ReadAllText(PathToDoctors);
         Doctors = JsonSerializer.Deserialize<List<Doctor>>(doctorsJson);
     }
     
     public void ImportPatients()
     {
-        var patientsJson = File.ReadAllText(_pathToPatients);
+        var patientsJson = File.ReadAllText(PathToPatients);
         Patients = JsonSerializer.Deserialize<List<Patient>>(patientsJson);
     }
 
     public void ExportDoctors()
     {
         var doctorsJson = JsonSerializer.Serialize(Doctors);
-        File.WriteAllText(_pathToDoctors, doctorsJson);
+        File.WriteAllText(PathToDoctors, doctorsJson);
     }
     
     public void ExportPatients()
     {
         var patientsJson = JsonSerializer.Serialize(Patients);
-        File.WriteAllText(_pathToPatients, patientsJson);
+        File.WriteAllText(PathToPatients, patientsJson);
     }
 }
